@@ -5,27 +5,24 @@ import { useState, useEffect } from "react";
 import './App.css';
 
 function App() {
-  const [users, setUsers] = useState([]); // Initialize with an empty array
-
-  // Fetch users when the component mounts
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
         const usersWithPics = data.map((user) => ({
           ...user,
-          profilePicture: null, // Add default profile picture field
+          profilePicture: null, 
         }));
 
         setUsers(usersWithPics);
       });
   }, []);
 
-  // Function to handle saving the updated user
   const handleSaveUser = (updatedUser) => {
     setUsers((prevUsers) =>
       prevUsers.map(
-        (user) => (user.id === updatedUser.id ? updatedUser : user) // Update the specific user
+        (user) => (user.id === updatedUser.id ? updatedUser : user) 
       )
     );
   };
